@@ -1,0 +1,27 @@
+{
+  "name": "rcon-io",
+  "version": "0.1.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@types/node": "20.5.7",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7",
+    "antd": "^5.12.1",
+    "eslint": "8.48.0",
+    "eslint-config-next": "14.0.2",
+    "lowdb": "^6.1.1",
+    "next": "14.0.2",
+    "rcon-srcds": "^2.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "short-unique-id": "^5.0.3",
+    "typescript": "5.0.4"
+  }
+}
