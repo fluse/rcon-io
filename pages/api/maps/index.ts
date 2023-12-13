@@ -18,6 +18,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
       const id = uid.rnd()
       const result = db.data.maps.push({
         ...body,
+        rating: 0,
         id,
       })
       

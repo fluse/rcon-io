@@ -14,12 +14,15 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
   }
 
   if (req.method === 'PUT') {
-    const { id } = req.query;
+    const { id } = req.query
     let map = db.data.maps.find((item:Map) => item.id === id);
 
     if (!map) return res.status(404).json(null)
-    
-    map = Object.assign(map, req.body)
+
+    const body = JSON.parse(req.body)
+    console.log(body)
+    map = Object.assign(map, body)
+    console.log(map)
     await db.write()
     res.status(200).json(map)
   }

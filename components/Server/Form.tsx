@@ -29,7 +29,7 @@ export default function Page({ onSubmit = () => {}}) {
 
 	return (
     <Form form={form} layout="vertical">
-      <Form.Item label="Name" name="name" required>
+      <Form.Item label="Name" name="name" required rules={[{ required: true }]}>
         <Input />
       </Form.Item>
 			<Row gutter={20}>
@@ -38,7 +38,7 @@ export default function Page({ onSubmit = () => {}}) {
 						<Input />
 					</Form.Item>
 				</Col>
-				<Col flex="120px">
+				<Col flex="130px">
 					<Form.Item label="Port" name="port" required rules={[{ required: true }]}>
 						<Input />
 					</Form.Item>

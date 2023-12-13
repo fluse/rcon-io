@@ -1,10 +1,10 @@
-import { Card, Popconfirm, message } from 'antd'
+import React from 'react'
+import { Avatar, Card, Popconfirm, message } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
 
 import RconSay from '@/components/RCON/Say'
-import RconTeams from '@/components/RCON/Teams'
-import RconMaps from '@/components/RCON/Maps'
 import { useAppState } from '@/provider/AppState'
+import ModalServerManage from './Manage'
 
 const serverListItems = ({ server }:any) => {
   const { setSelectedServer, refreshServerList } = useAppState()
@@ -24,7 +24,7 @@ const serverListItems = ({ server }:any) => {
 
   const actions = [
     <a key="connect" target="_blank" href={`steam://connect/${server.host}:${server.port}`}>join</a>,
-    <a key="manage" onClick={e => setSelectedServer(server)}>manage</a>,
+    <ModalServerManage key="dfaef" server={server} />,
     <Popconfirm
       key="confirm"
       placement="left"
@@ -39,12 +39,11 @@ const serverListItems = ({ server }:any) => {
   return (
     <Card actions={actions}>
       <Card.Meta
+        avatar={<Avatar src={`https://api.dicebear.com/7.x/shapes/svg?seed=${server.name}`} />}
         title={server.name}
         description={`${server.host}:${server.port}`}
       />
       <RconSay server={server} />
-      <RconTeams server={server} />
-      <RconMaps server={server} />
     </Card>
   )
 }

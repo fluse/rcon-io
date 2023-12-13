@@ -23,7 +23,7 @@ const RconTeams = ({ server }:any) => {
       <Button type="primary" size="small" onClick={e => send('game_type 0; game_mode 0;mp_restartgame 1;')}>Casual</Button>
         <Button type="primary" size="small" onClick={e => send('game_type 1; game_mode 2;sv_skirmish_id 0;mp_restartgame 1;')}>Deathmatch</Button>
         <Button type="primary" size="small" onClick={e => send('game_type 0; game_mode 1;mp_restartgame 1')}>Competitve</Button>
-      </Space>  
+      </Space>
       <Space wrap style={{ paddingBottom: '10px'}}>
         <Button type="primary" size="small" onClick={e => send('mp_pause_match')}>Pause match</Button>
         <Button type="primary" size="small" onClick={e => send('mp_unpause_match')}>Resume match</Button>
@@ -31,9 +31,9 @@ const RconTeams = ({ server }:any) => {
 
       <Space wrap>
         <Button type="primary" size="small" onClick={e => send('mp_pause_match')}>Pause match</Button>
-        <Button type="primary" size="small" onClick={e => send('mp_buy_allow_guns 1; bot_pistols_only 1;')}>Pistols only</Button>
-        <Button type="primary" size="small" onClick={e => send('mp_buy_allow_guns 255; bot_pistols_only 0;')}>Pistols off</Button>
-        <Button type="primary" size="small" onClick={e => send('mp_damage_headshot_only 1')}>Headshot only</Button>
+        <Button type="primary" size="small" onClick={e => send('mp_buy_allow_guns 1; bot_pistols_only 1;mp_free_armor 0;')}>Pistols only</Button>
+        <Button type="primary" size="small" onClick={e => send('mp_buy_allow_guns 255; bot_pistols_only 0;mp_free_armor 2;')}>Pistols off</Button>
+        <Button type="primary" size="small" onClick={e => send('mp_damage_headshot_only 1;')}>Headshot only</Button>
         <Button type="primary" size="small" onClick={e => send('mp_damage_headshot_only 0')}>Headshot only off</Button>
       </Space>
     </>

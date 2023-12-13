@@ -5,7 +5,7 @@ const StyledContent = ({ children }) => (
   <Content
     style={{
       margin: '18px 14px',
-      padding: 22,
+      padding: 16,
       backgroundColor: '#fff'
     }}
   >

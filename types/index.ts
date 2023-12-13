@@ -4,6 +4,7 @@ export interface Map {
   filename?: string
   name: string
   commands: string
+  rating: number
 }
 
 export interface DatabaseSchema {

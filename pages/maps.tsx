@@ -1,4 +1,4 @@
-import { message, Row, Col, List, Space, Input } from 'antd'
+import { message, Row, Col, List, Space, Input, Rate } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
 
 import type { Map } from '@/types'
@@ -29,18 +29,35 @@ export default function Page() {
 		refreshMapList()
   }
 
+  const update = async (id:string, values:any) => {
+    const response = await fetch(`/api/maps/${id}`, {
+			method: 'PUT',
+      body: JSON.stringify(values)
+		})
+		message.open({
+			type: 'success',
+			content: 'Update Map'
+		})
+		refreshMapList()
+  }
+
 	return (
 		<>
       <Space size="large" style={{display: 'block', padding: '15px 15px 0', width: '100%'}}>
         <Row>
-          <Col flex={2}>
-          <Content>
-            <AddMapForm />
-          </Content>
+          <Col flex="400px">
+            <Content>
+              <AddMapForm />
+            </Content>
           </Col>
           <Col flex={3}>
             <Space size="large" style={{display: 'block', padding: '18px 15px 0 15px', width: '100%'}}>
-              <Input.Search placeholder="search for map" onChange={e => setSearch(e.target.value)} />
+              <Input.Search
+                placeholder="search for map"
+                defaultValue={search}
+                onChange={e => setSearch(e.target.value)}
+                allowClear
+              />
             </Space>
             <StyledContent>
               <List
@@ -50,6 +67,9 @@ export default function Page() {
                 renderItem={(item:Map) => (
                   <List.Item actions={[
                     <a key="workshop" hidden={!('workshopId' in item)} href={`https://steamcommunity.com/sharedfiles/filedetails/?id=${item.workshopId}`} target="_blank">Workshop</a>,
+                    <Rate key="rating" allowHalf defaultValue={item.rating} onChange={rating => update(item.id, {
+                      rating
+                    })} />,
                     <a key="df" onClick={e => removeMap(item.id)}><DeleteTwoTone /></a>
                   ]}>
                     {item.name}

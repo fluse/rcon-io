@@ -19,6 +19,12 @@ export default function Page() {
   )
 
   const remove = async (id:String) => {
+    if (users.length === 1) {
+      return message.open({
+        type: 'error',
+        content: 'Last user cannot be deleted'
+      })
+    }
     const response = await fetch(`/api/user/${id}`, {
 			method: 'DELETE'
 		})
@@ -33,14 +39,19 @@ export default function Page() {
 		<>
       <Space size="large" style={{display: 'block', padding: '15px 15px 0', width: '100%'}}>
         <Row>
-          <Col flex={2}>
+          <Col flex="400px">
 						<Content>
 							<AddUserForm />
 						</Content>
           </Col>
           <Col flex={3}>
             <Space size="large" style={{display: 'block', padding: '18px 15px 0 15px', width: '100%'}}>
-              <Input.Search placeholder="search for user" onChange={e => setSearch(e.target.value)} />
+              <Input.Search
+                placeholder="search for user"
+                defaultValue={search}
+                onChange={e => setSearch(e.target.value)}
+                allowClear
+              />
             </Space>
             <StyledContent>
               <List
@@ -50,9 +61,9 @@ export default function Page() {
                 renderItem={(item:User) => (
                   <List.Item actions={[
                     <a key="workshop" hidden={!('workshopId' in item)} href={`https://steamcommunity.com/sharedfiles/filedetails/?id=${item.workshopId}`} target="_blank">Workshop</a>,
-                    <a key="df" onClick={e => remove(item.id)}><DeleteTwoTone /></a>
+                    <a key="df" onClick={e => remove(item.id)}><DeleteTwoTone disabled={users.length === 1} /></a>
                   ]}>
-                    {item.name}
+                    {item.isAdmin && '<Admin> '}{item.name}
                   </List.Item>
                 )}
               />
