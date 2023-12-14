@@ -23,6 +23,7 @@ interface IAppState {
   setSelectedServer: Function
   refreshMapList: Function
   setLoggedInUser: Function
+  sendCommand: Function
 }
 
 const DefaultState:IAppState = {
@@ -35,7 +36,8 @@ const DefaultState:IAppState = {
   selectedServer: null,
   setSelectedServer: () => {},
   refreshMapList: () => {},
-  setLoggedInUser: () => {}
+  setLoggedInUser: () => {},
+  sendCommand: () => {}
 }
 
 const AppStateContext = createContext(DefaultState)

@@ -6,7 +6,7 @@ import RconSay from '@/components/RCON/Say'
 import { useAppState } from '@/provider/AppState'
 import ModalServerManage from './Manage'
 
-const serverListItems = ({ server }:any) => {
+const ServerListItems = ({ server }:any) => {
   const { setSelectedServer, refreshServerList } = useAppState()
 
 	const deleteServer = async (id:String) => {
@@ -48,4 +48,4 @@ const serverListItems = ({ server }:any) => {
   )
 }
 
-export default serverListItems;
+export default ServerListItems;

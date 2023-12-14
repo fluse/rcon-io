@@ -1,7 +1,7 @@
 import { message, Input, Button, Space, Form } from 'antd'
 import { SendOutlined } from '@ant-design/icons'
 
-const RconSay = ({ server }) => {
+const RconSay = ({ server }:any) => {
   const [form] = Form.useForm();
 
   const sendMessage = async () => {

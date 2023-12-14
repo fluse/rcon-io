@@ -63,7 +63,7 @@ class RconClient {
       if (!response || response === true) return null
 
       const list = response.split(/\r?\n/)
-      const dict = {
+      const dict:any = {
         hasPlayers: false,
       }
 
@@ -104,6 +104,7 @@ class RconManager {
 
   writeLog(serverId:string, command:string) {
     const server = db.data.servers.find((server:Server) => server.id === serverId)
+    console.log(server)
     if (server) {
 
       // cut oldest log entries
@@ -114,7 +115,7 @@ class RconManager {
     }
   }
 
-  async run(server:Server, command:string) {
+  async run(server:any, command:string) {
     const client = this.getOrSet(server)
     const result = await client.run(command)
     this.writeLog(server.id, command)
@@ -127,4 +128,5 @@ class RconManager {
   }
 }
 
-export default new RconManager()
+const Instance = new RconManager()
+export default Instance

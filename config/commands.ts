@@ -24,6 +24,11 @@ export const KnifeRound = `
   mp_warmup_end;
 `
 
+export const Test = `
+exec gamemode_competitive.cfg;
+mp_warmup_end;
+`
+
 export const Warmup = `
   bot_kick;
   sv_cheats 0;
@@ -62,7 +67,7 @@ export const Warmup = `
   sv_cheats 0;
   mp_ct_default_melee weapon_knife;
   mp_ct_default_secondary weapon_hkp2000;
-  mp_ct_default_primary "";
+  mp_ct_default_primary '';
   mp_t_default_melee weapon_knife;
   mp_t_default_secondary weapon_glock;
   mp_t_default_primary;
@@ -72,9 +77,9 @@ export const Warmup = `
   mp_warmuptime 9999;
   cash_team_bonus_shorthanded 0;
   cash_team_loser_bonus_shorthanded 0;
-  say Warmup!
-  say Warmup!
-  say Warmup!
+  say Warmup!;
+  say Warmup!;
+  say Warmup!;
 `
 
 export const Practice = `

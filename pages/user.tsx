@@ -60,7 +60,6 @@ export default function Page() {
                 dataSource={filteredUsers}
                 renderItem={(item:User) => (
                   <List.Item actions={[
-                    <a key="workshop" hidden={!('workshopId' in item)} href={`https://steamcommunity.com/sharedfiles/filedetails/?id=${item.workshopId}`} target="_blank">Workshop</a>,
                     <a key="df" onClick={e => remove(item.id)}><DeleteTwoTone disabled={users.length === 1} /></a>
                   ]}>
                     {item.isAdmin && '<Admin> '}{item.name}

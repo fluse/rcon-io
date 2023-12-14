@@ -1,10 +1,10 @@
 import { useAppState } from '@/provider/AppState'
 import { Space, Select } from 'antd'
 
-const RconTeams = ({ server }) => {
+const RconTeams = ({ server }:any) => {
   const { mapList, sendCommand } = useAppState()
 
-  const changeMap = (value, selected) => {
+  const changeMap = (value:any, selected:any) => {
     console.log(value, selected)
     let command = `host_workshop_map ${selected.workshopId}`
     if (!('workshopId' in selected)) {
@@ -26,9 +26,9 @@ const RconTeams = ({ server }) => {
     <>
       <Space style={{ paddingTop: '10px', display: 'block', width: '100%' }}>
         <Select
+          size='large'
           options={options}
           onChange={changeMap}
-          filterOption={filterOption}
           showSearch
           placeholder="Change map"
           style={{ display: 'block', width: '100%' }}
