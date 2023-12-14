@@ -1,15 +1,15 @@
 import { Input, Button, Form, message, Row, Col } from 'antd'
 
-import { useAppState } from '../../provider/AppState'
+import { useAppState } from '@/provider/AppState'
 
 export default function Page({ onSubmit = () => {}}) {
-	const { refreshServerList } = useAppState()
+	const { hasPermission, refreshServerList } = useAppState()
 
 	const [form] = Form.useForm()
 
 	const saveServer = async () => {
-		const values = await form.validateFields();
-
+		let values = await form.validateFields();
+		values.port = parseInt(values.port)
 		const response = await fetch(`http://localhost:3000/api/server`, {
 			body: JSON.stringify(values),
 			method: 'POST'
@@ -28,7 +28,7 @@ export default function Page({ onSubmit = () => {}}) {
 	}
 
 	return (
-    <Form form={form} layout="vertical">
+    <Form disabled={!hasPermission('modify_server')}  form={form} layout="vertical">
       <Form.Item label="Name" name="name" required rules={[{ required: true }]}>
         <Input />
       </Form.Item>

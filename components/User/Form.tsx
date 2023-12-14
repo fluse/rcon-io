@@ -1,37 +1,44 @@
-import { Input, Button, Form, message, Checkbox, Divider, Typography, Switch } from 'antd'
+import {
+	Input, Button, Form, message, Checkbox, Divider, Typography, Switch
+} from 'antd'
 
-import { useAppState } from '../../provider/AppState'
-import useLocalStorage from '@/hooks/useLocalStorage'
+import { useAppState } from '@/provider/AppState'
 
-export default function Page({ onSubmit = () => {}}) {
-	const { fetchUsers } = useAppState()
+export default function UserForm({ user = null, onSubmit = () => {}}:any) {
+	const { hasPermission, fetchUsers } = useAppState()
 
 	const [form] = Form.useForm()
 
 	const save = async () => {
 		const values = await form.validateFields();
 
-		const response = await fetch(`/api/user`, {
-			body: JSON.stringify(values),
-			method: 'POST'
-		})
+		let response = null
+		if (user.id) {
+			response = await fetch(`/api/user/${user.id}`, {
+				body: JSON.stringify(values),
+				method: 'PUT'
+			})
+		} else {
+			response = await fetch(`/api/user`, {
+				body: JSON.stringify(values),
+				method: 'POST'
+			})
+		}		
+		onSubmit()
 
 		if (response.status !== 200) {
-			message.open({
+			return message.open({
 				type: 'error',
 				content: response.statusText
 			})
-		} else {
-			form.resetFields()
-			fetchUsers()
 		}
-    onSubmit()
+
+		form.resetFields()
+		fetchUsers()
 	}
 
 	return (
-    <Form form={form} layout="vertical">
-			<Typography.Title level={4} style={{ marginTop: 0}}>Create User</Typography.Title>
-			<Divider />
+    <Form initialValues={user} disabled={!hasPermission('modify_user')} form={form} layout="vertical">
       <Form.Item label="Name" name="name" required rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -42,7 +49,7 @@ export default function Page({ onSubmit = () => {}}) {
 				<Switch defaultValue={false} />
       </Form.Item>
 			<Form.Item label="Permissions" name="permissions">
-				<Checkbox.Group options={['modify_user', 'modify_server']} defaultValue={[]} />
+				<Checkbox.Group options={['modify_user', 'modify_server', 'modify_maps']} defaultValue={[]} />
 			</Form.Item>
       <Button type="primary" htmlType="submit" onClick={save}>Create User</Button>
     </Form>

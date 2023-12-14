@@ -1,10 +1,11 @@
-import { message, Row, Col, List, Space, Input } from 'antd'
+import { message, Row, Col, Typography, Divider, List, Space, Input } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
 
 import type { User } from '@/types'
 
 import Content from '@/components/Content'
 import AddUserForm from '@/components/User/Form'
+import ModalUserForm from '@/components/User/Modal'
 
 import { useAppState } from '@/provider/AppState'
 import StyledContent from '@/components/Content'
@@ -12,7 +13,7 @@ import useLocalStorage from '@/hooks/useLocalStorage'
 
 export default function Page() {
   const [search, setSearch] = useLocalStorage('userSearch', '')
-	const { users, fetchUsers } = useAppState()
+	const { hasPermission, users, fetchUsers } = useAppState()
 
   const filteredUsers = users.filter(
     (map:User) => map.name.toLowerCase().includes(search.toLowerCase())
@@ -41,6 +42,8 @@ export default function Page() {
         <Row>
           <Col flex="400px">
 						<Content>
+              <Typography.Title level={4} style={{ marginTop: 0}}>Create User</Typography.Title>
+			        <Divider />
 							<AddUserForm />
 						</Content>
           </Col>
@@ -60,9 +63,10 @@ export default function Page() {
                 dataSource={filteredUsers}
                 renderItem={(item:User) => (
                   <List.Item actions={[
-                    <a key="df" onClick={e => remove(item.id)}><DeleteTwoTone disabled={users.length === 1} /></a>
+                    hasPermission('modify_user') && (<ModalUserForm user={item} />),
+                    hasPermission('delete_user') && (<a key="update" onClick={e => remove(item.id)}><DeleteTwoTone disabled={users.length === 1} /></a>)
                   ]}>
-                    {item.isAdmin && '<Admin> '}{item.name}
+                    {item.isAdmin && (<span style={{color: 'red'}}>Admin </span>)}{item.name}
                   </List.Item>
                 )}
               />

@@ -8,6 +8,7 @@ import React, {
   useMemo,
 } from 'react';
 import { message } from 'antd'
+import { useInterval } from 'usehooks-ts'
 import useLocalStorage from '@/hooks/useLocalStorage'
 
 import type { Server, User, Map } from '@/types'
@@ -24,6 +25,8 @@ interface IAppState {
   refreshMapList: Function
   setLoggedInUser: Function
   sendCommand: Function
+  hasPermission: Function
+  refreshCommandList: Function
 }
 
 const DefaultState:IAppState = {
@@ -37,7 +40,9 @@ const DefaultState:IAppState = {
   setSelectedServer: () => {},
   refreshMapList: () => {},
   setLoggedInUser: () => {},
-  sendCommand: () => {}
+  sendCommand: () => {},
+  hasPermission: () => {},
+  refreshCommandList: () => {}
 }
 
 const AppStateContext = createContext(DefaultState)
@@ -49,9 +54,16 @@ export const AppStateProvider = ({ children }:any) => {
   const [mapList, setMapList] = useState([])
   const [loggedInUser, setLoggedInUser] = useLocalStorage('login', null)
   const [selectedServer, setSelectedServer] = useLocalStorage('selectedServer', null)
+  const [commandList, setCommandList] = useState([])
+  const hasPermission = (permission:string) => {
+    if (!loggedInUser) return false
+    if (loggedInUser.isAdmin) return true
+
+    return loggedInUser?.permissions?.includes(permission) || false
+  }
 
   const sendCommand = async (server:Server, command:String) => {
-    await fetch(`http://localhost:3000/api/rcon/${server.id}`, {
+    await fetch(`/api/rcon/${server.id}`, {
 			body: JSON.stringify({ command }),
 			method: 'POST'
 		})
@@ -60,6 +72,11 @@ export const AppStateProvider = ({ children }:any) => {
       type: 'success',
       content: `Send!`
     })
+  }
+
+  const refreshCommandList = async () => {
+    const result = await (await fetch(`/api/command`)).json()
+		setCommandList(result)
   }
 
   const refreshServerList = async () => {
@@ -77,6 +94,10 @@ export const AppStateProvider = ({ children }:any) => {
 		setUsers(result)
   }
 
+  useInterval(() => {
+    refreshServerList()
+  }, 5000)
+
   useEffect(() => {
     refreshServerList()
     setIsClient(true)
@@ -87,13 +108,18 @@ export const AppStateProvider = ({ children }:any) => {
     if (loggedInUser) {
       refreshMapList()
       fetchUsers()
+      refreshCommandList()
     }
   }, [loggedInUser])
 
   const state = useMemo(() => ({
     users, fetchUsers, 
-    serverList, selectedServer, setSelectedServer, refreshServerList,
-    loggedInUser, setLoggedInUser, refreshMapList, mapList, sendCommand
+    serverList, refreshServerList,
+    selectedServer, setSelectedServer, 
+    loggedInUser, setLoggedInUser, 
+    mapList, refreshMapList,
+    sendCommand,
+    hasPermission
   }), [
     serverList, users, selectedServer, loggedInUser, mapList
   ])

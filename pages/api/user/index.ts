@@ -20,7 +20,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
 
     const id = uid.rnd()
 
-    db.data.users.push({ id, ...body })
+    db.data.users.push({ id, permissions: [], ...body })
     await db.write()
     res.status(200).json(id)
   }

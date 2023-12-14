@@ -1,6 +1,6 @@
-import { Layout, Row, Col } from 'antd'
+import { Layout, Row, Col, Button } from 'antd'
 import Image from 'next/image'
-
+import { GithubOutlined } from '@ant-design/icons'
 import Content from '@/components/Content'
 import LoginForm from '@/components/Login/Form'
 
@@ -17,7 +17,7 @@ const LoginPage = () => (
           <LoginForm />
         </Content>
         <div style={{ textAlign: 'center'}}>
-          <a href="https://github.com/fluse/rcon-io" target="_blank">Github</a>
+          <Button type="link" icon={<GithubOutlined />} href="https://github.com/fluse/rcon-io" target="_blank">Github</Button>
         </div>
       </Col>
       <Col flex="auto"></Col>

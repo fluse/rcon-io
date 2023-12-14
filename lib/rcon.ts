@@ -14,7 +14,8 @@ class RconClient {
   constructor(server:Server) {
     this.isReady = false
     this.host = server.host
-    this.port = server.port
+    this.port = parseInt(server.port)
+    console.log(this.host, this.port)
     this.password = server.rcon
 
     this.rcon = null

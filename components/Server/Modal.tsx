@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { PlusSquareTwoTone } from '@ant-design/icons'
 import { Button, Divider, Modal } from 'antd'
 import CreateServerForm from './Form'
 
@@ -11,8 +12,8 @@ const CreateServerModal = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Add Server
+      <Button type='link' icon={<PlusSquareTwoTone />} onClick={showModal}>
+        Server
       </Button>
       <Modal title="Add Server" footer={null} open={isModalOpen} onCancel={handleCancel}>
         <Divider />

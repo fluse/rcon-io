@@ -7,7 +7,7 @@ import { useAppState } from '@/provider/AppState'
 import ModalServerManage from './Manage'
 
 const ServerListItems = ({ server }:any) => {
-  const { setSelectedServer, refreshServerList } = useAppState()
+  const { hasPermission, setSelectedServer, refreshServerList } = useAppState()
 
 	const deleteServer = async (id:String) => {
 		const response = await fetch(`/api/server/${id}`, {
@@ -24,7 +24,10 @@ const ServerListItems = ({ server }:any) => {
 
   const actions = [
     <a key="connect" target="_blank" href={`steam://connect/${server.host}:${server.port}`}>join</a>,
-    <ModalServerManage key="dfaef" server={server} />,
+  ]
+
+  if (hasPermission('modify_server')) actions.push(<ModalServerManage key="dfaef" server={server} />)
+  if (hasPermission('modify_server')) actions.push(
     <Popconfirm
       key="confirm"
       placement="left"
@@ -34,7 +37,7 @@ const ServerListItems = ({ server }:any) => {
     >
       <DeleteTwoTone />
     </Popconfirm>
-  ]
+  )
 
   return (
     <Card actions={actions}>

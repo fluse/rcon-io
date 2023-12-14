@@ -14,7 +14,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const PageLayout = ({ children }:any) => {
-  const { serverList, loggedInUser, selectedServer, setSelectedServer } = useAppState()
+  const { hasPermission, serverList, loggedInUser, selectedServer, setSelectedServer } = useAppState()
 
   const options = serverList.map((server:Server) => ({
     label: `${server?.name}`,
@@ -47,7 +47,7 @@ const PageLayout = ({ children }:any) => {
           </div>
           <Menu />
           <Flex gap="small" justify='flex-end' style={{flexGrow: '1'}}>
-            <CreateServerModal />
+            {hasPermission('modify_server') && <CreateServerModal />}
             <Select
               options={options}
               style={selectionStyles}

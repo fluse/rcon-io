@@ -5,6 +5,7 @@ import {
   SkinTwoTone,
   HomeTwoTone,
   PictureTwoTone,
+  BoxPlotTwoTone,
 } from '@ant-design/icons';
 
 const { Header, Sider } = Layout;
