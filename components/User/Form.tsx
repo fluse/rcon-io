@@ -4,7 +4,10 @@ import {
 
 import { useAppState } from '@/provider/AppState'
 
-export default function UserForm({ user = null, onSubmit = () => {}}:any) {
+export default function UserForm({
+	user = null, onSubmit = () => {},
+	buttonText = 'create'
+}:any) {
 	const { hasPermission, fetchUsers } = useAppState()
 
 	const [form] = Form.useForm()
@@ -13,7 +16,7 @@ export default function UserForm({ user = null, onSubmit = () => {}}:any) {
 		const values = await form.validateFields();
 
 		let response = null
-		if (user.id) {
+		if (user?.id) {
 			response = await fetch(`/api/user/${user.id}`, {
 				body: JSON.stringify(values),
 				method: 'PUT'
@@ -49,9 +52,9 @@ export default function UserForm({ user = null, onSubmit = () => {}}:any) {
 				<Switch defaultValue={false} />
       </Form.Item>
 			<Form.Item label="Permissions" name="permissions">
-				<Checkbox.Group options={['modify_user', 'modify_server', 'modify_maps']} defaultValue={[]} />
+				<Checkbox.Group options={['modify_user', 'modify_server', 'modify_maps', 'modify_promts']} defaultValue={[]} />
 			</Form.Item>
-      <Button type="primary" htmlType="submit" onClick={save}>Create User</Button>
+      <Button type="primary" htmlType="submit" onClick={save}>{buttonText}</Button>
     </Form>
 	)
 }

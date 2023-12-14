@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 /.vscode
-db.json
+db*.json
 
 # testing
 /coverage

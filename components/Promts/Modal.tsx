@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Divider, Modal } from 'antd'
 import { EditTwoTone } from '@ant-design/icons'
-import UserForm from './Form'
+import PromtForm from './Form'
 
-const UserFormModal = ({ user }:any) => {
+const UserFormModal = ({ promt }:any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => setIsModalOpen(true)
@@ -13,9 +13,9 @@ const UserFormModal = ({ user }:any) => {
   return (
     <>
       <EditTwoTone onClick={showModal} />
-      <Modal title={`Update: ${user.name}`} footer={null} open={isModalOpen} onCancel={handleCancel}>
+      <Modal title={`Update: ${promt.name}`} footer={null} open={isModalOpen} onCancel={handleCancel}>
         <Divider />
-        <UserForm user={user} buttonText="update" onSubmit={handleCancel} />
+        <PromtForm promt={promt} buttonText="update" onSubmit={handleCancel} />
       </Modal>
     </>
   )

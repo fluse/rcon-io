@@ -11,7 +11,7 @@ import { message } from 'antd'
 import { useInterval } from 'usehooks-ts'
 import useLocalStorage from '@/hooks/useLocalStorage'
 
-import type { Server, User, Map } from '@/types'
+import type { Server, User, Map, Promt } from '@/types'
 
 interface IAppState {
   users: User[]
@@ -26,7 +26,8 @@ interface IAppState {
   setLoggedInUser: Function
   sendCommand: Function
   hasPermission: Function
-  refreshCommandList: Function
+  promtList: Promt[]
+  refreshPromtList: Function
 }
 
 const DefaultState:IAppState = {
@@ -42,7 +43,8 @@ const DefaultState:IAppState = {
   setLoggedInUser: () => {},
   sendCommand: () => {},
   hasPermission: () => {},
-  refreshCommandList: () => {}
+  promtList: [],
+  refreshPromtList: () => {}
 }
 
 const AppStateContext = createContext(DefaultState)
@@ -54,7 +56,7 @@ export const AppStateProvider = ({ children }:any) => {
   const [mapList, setMapList] = useState([])
   const [loggedInUser, setLoggedInUser] = useLocalStorage('login', null)
   const [selectedServer, setSelectedServer] = useLocalStorage('selectedServer', null)
-  const [commandList, setCommandList] = useState([])
+  const [promtList, setPromtList] = useState([])
   const hasPermission = (permission:string) => {
     if (!loggedInUser) return false
     if (loggedInUser.isAdmin) return true
@@ -74,9 +76,9 @@ export const AppStateProvider = ({ children }:any) => {
     })
   }
 
-  const refreshCommandList = async () => {
-    const result = await (await fetch(`/api/command`)).json()
-		setCommandList(result)
+  const refreshPromtList = async () => {
+    const result = await (await fetch(`/api/promts`)).json()
+		setPromtList(result)
   }
 
   const refreshServerList = async () => {
@@ -108,7 +110,7 @@ export const AppStateProvider = ({ children }:any) => {
     if (loggedInUser) {
       refreshMapList()
       fetchUsers()
-      refreshCommandList()
+      refreshPromtList()
     }
   }, [loggedInUser])
 
@@ -118,6 +120,7 @@ export const AppStateProvider = ({ children }:any) => {
     selectedServer, setSelectedServer, 
     loggedInUser, setLoggedInUser, 
     mapList, refreshMapList,
+    promtList, refreshPromtList,
     sendCommand,
     hasPermission
   }), [

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CreateServerModal from '@/components/Server/Modal'
 
-import { Layout, Select, Flex } from 'antd'
+import { Layout, Select, Flex, message } from 'antd'
 import type { Server } from '@/types'
 
 const { Header } = Layout;
@@ -15,6 +15,12 @@ import Link from 'next/link';
 
 const PageLayout = ({ children }:any) => {
   const { hasPermission, serverList, loggedInUser, selectedServer, setSelectedServer } = useAppState()
+
+  message.config({
+    top: 100,
+    duration: 2,
+    maxCount: 1,
+  });
 
   const options = serverList.map((server:Server) => ({
     label: `${server?.name}`,

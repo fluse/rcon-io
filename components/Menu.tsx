@@ -28,6 +28,11 @@ const PageMenu = () => {
       label: 'Server',
     },
     {
+      key: 'promts',
+      icon: <BoxPlotTwoTone />,
+      label: 'Promts',
+    },
+    {
       key: 'maps',
       icon: <PictureTwoTone />,
       label: 'Maps',

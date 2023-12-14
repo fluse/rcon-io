@@ -1,9 +1,9 @@
 import { useAppState } from '@/provider/AppState'
 import { Form } from 'antd'
 
-import { Warmup, Test } from '@/config/commands'
+import { Warmup, Test } from '@/config/promts'
 
-import StyledTag from '../Command/Tag'
+import StyledTag from '../Promts/Tag'
 
 const RconTeams = ({ server }:any) => {
   const { sendCommand } = useAppState()

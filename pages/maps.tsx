@@ -1,6 +1,6 @@
-import { message, Row, Col, List, Space, Input, Rate } from 'antd'
-import { DeleteTwoTone } from '@ant-design/icons'
-
+import { message, Button, Row, Col, List, Space, Input, Rate } from 'antd'
+import { DeleteTwoTone, PlayCircleTwoTone } from '@ant-design/icons'
+import Head from 'next/head'
 import type { Map } from '@/types'
 
 import Content from '@/components/Content'
@@ -12,7 +12,7 @@ import useLocalStorage from '@/hooks/useLocalStorage'
 
 export default function Page() {
   const [search, setSearch] = useLocalStorage('mapSearch', '')
-	const { mapList, refreshMapList } = useAppState()
+	const { mapList, refreshMapList, sendCommand, selectedServer } = useAppState()
 
   const filteredMap = mapList.filter(
     (map:Map) => map.name.toLowerCase().includes(search.toLowerCase())
@@ -41,8 +41,19 @@ export default function Page() {
 		refreshMapList()
   }
 
+  const changeMap = (map:Map) => {
+    let command = `host_workshop_map ${map.workshopId}`
+    if (!('workshopId' in map)) {
+      command = `map ${map.filename}`
+    }
+    sendCommand(selectedServer, command)
+  }
+
 	return (
 		<>
+      <Head>
+				<title>RCON IO - Maps</title>
+			</Head>
       <Space size="large" style={{display: 'block', padding: '15px 15px 0', width: '100%'}}>
         <Row>
           <Col flex="400px">
@@ -72,7 +83,7 @@ export default function Page() {
                     })} />,
                     <a key="df" onClick={e => removeMap(item.id)}><DeleteTwoTone /></a>
                   ]}>
-                    {item.name}
+                    <Button type="link" onClick={_ => changeMap(item)}icon={<PlayCircleTwoTone />} />{item.name}
                   </List.Item>
                 )}
               />

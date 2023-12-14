@@ -11,10 +11,10 @@ export interface DatabaseSchema {
   servers: Server[]
   users: User[]
   maps: Map[]
-  commands: Command[]
+  promts: Promt[]
 }
 
-export interface Command {
+export interface Promt {
   id: string
   name: string
   promt: string

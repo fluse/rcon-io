@@ -1,12 +1,12 @@
 import { JSONPreset } from 'lowdb/node'
 
 import type { DatabaseSchema } from '@/types'
-import { DefaultCommands } from '@/config/commands'
+import { DefaultPromts } from '@/config/promts'
 import { DefaultMaps } from '@/config/maps'
 
 const defaultData:DatabaseSchema = {
   servers: [],
-  commands: DefaultCommands,
+  promts: DefaultPromts,
   maps: DefaultMaps,
   users: [{
     id: 'aaa',

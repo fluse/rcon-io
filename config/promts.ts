@@ -102,7 +102,7 @@ export const Practice = `
   say Practice Mode!
 `
 
-export const DefaultCommands = [{
+export const DefaultPromts = [{
   id: 'knife',
   name: 'Knife Round',
   promt: KnifeRound,

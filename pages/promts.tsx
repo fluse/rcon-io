@@ -1,10 +1,11 @@
-import { message, Row, Col, List, Space, Input, Rate } from 'antd'
-import { DeleteTwoTone } from '@ant-design/icons'
-
-import type { Map } from '@/types'
+import { message, Row, Col, List, Space, Input, Rate, Button } from 'antd'
+import { DeleteTwoTone, PlayCircleTwoTone } from '@ant-design/icons'
+import Head from 'next/head'
+import type { Promt } from '@/types'
 
 import Content from '@/components/Content'
-import FormCommands from '@/components/Command/Form'
+import FormCommands from '@/components/Promts/Form'
+import ModalPromt from '@/components/Promts/Modal'
 
 import { useAppState } from '@/provider/AppState'
 import StyledContent from '@/components/Content'
@@ -12,25 +13,25 @@ import useLocalStorage from '@/hooks/useLocalStorage'
 
 export default function Page() {
   const [search, setSearch] = useLocalStorage('mapSearch', '')
-	const { mapList, refreshMapList } = useAppState()
+	const { hasPermission, promtList, refreshPromtList, selectedServer, sendCommand } = useAppState()
 
-  const filteredMap = mapList.filter(
-    (map:Map) => map.name.toLowerCase().includes(search.toLowerCase())
+  const filteredList = promtList.filter(
+    (map:Promt) => map.name.toLowerCase().includes(search.toLowerCase())
   )
 
-  const removeMap = async (id:String) => {
-    const response = await fetch(`/api/maps/${id}`, {
+  const remove = async (id:String) => {
+    const response = await fetch(`/api/promts/${id}`, {
 			method: 'DELETE'
 		})
 		message.open({
 			type: 'success',
 			content: 'Map permanently deleted'
 		})
-		refreshMapList()
+		refreshPromtList()
   }
 
   const update = async (id:string, values:any) => {
-    const response = await fetch(`/api/maps/${id}`, {
+    const response = await fetch(`/api/promts/${id}`, {
 			method: 'PUT',
       body: JSON.stringify(values)
 		})
@@ -38,14 +39,17 @@ export default function Page() {
 			type: 'success',
 			content: 'Update Map'
 		})
-		refreshMapList()
+		refreshPromtList()
   }
 
 	return (
 		<>
+      <Head>
+				<title>RCON IO - Promts</title>
+			</Head>
       <Space size="large" style={{display: 'block', padding: '15px 15px 0', width: '100%'}}>
         <Row>
-          <Col flex="400px">
+          <Col flex="600px">
             <Content>
               <FormCommands />
             </Content>
@@ -53,7 +57,7 @@ export default function Page() {
           <Col flex={3}>
             <Space size="large" style={{display: 'block', padding: '18px 15px 0 15px', width: '100%'}}>
               <Input.Search
-                placeholder="search for map"
+                placeholder="search for promt"
                 defaultValue={search}
                 onChange={e => setSearch(e.target.value)}
                 allowClear
@@ -63,16 +67,13 @@ export default function Page() {
               <List
                 pagination={{ size: 'small', pageSize: 15, position: 'bottom', align: 'end' }}
                 size="small"
-                dataSource={filteredMap}
-                renderItem={(item:Map) => (
+                dataSource={filteredList}
+                renderItem={(item:Promt) => (
                   <List.Item actions={[
-                    <a key="workshop" hidden={!('workshopId' in item)} href={`https://steamcommunity.com/sharedfiles/filedetails/?id=${item.workshopId}`} target="_blank">Workshop</a>,
-                    <Rate key="rating" allowHalf defaultValue={item.rating} onChange={rating => update(item.id, {
-                      rating
-                    })} />,
-                    <a key="df" onClick={e => removeMap(item.id)}><DeleteTwoTone /></a>
+                    hasPermission('modify_promts') && (<ModalPromt promt={item} />),
+                    <a key="df" onClick={e => remove(item.id)}><DeleteTwoTone /></a>,
                   ]}>
-                    {item.name}
+                    <Button type="link" onClick={_ => sendCommand(selectedServer, item.promt)}icon={<PlayCircleTwoTone />} />{item.name}
                   </List.Item>
                 )}
               />

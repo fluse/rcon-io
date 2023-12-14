@@ -1,6 +1,6 @@
 import { message, Row, Col, Typography, Divider, List, Space, Input } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
-
+import Head from 'next/head'
 import type { User } from '@/types'
 
 import Content from '@/components/Content'
@@ -38,6 +38,9 @@ export default function Page() {
 
 	return (
 		<>
+			<Head>
+				<title>RCON IO - User</title>
+			</Head>
       <Space size="large" style={{display: 'block', padding: '15px 15px 0', width: '100%'}}>
         <Row>
           <Col flex="400px">
@@ -66,7 +69,7 @@ export default function Page() {
                     hasPermission('modify_user') && (<ModalUserForm user={item} />),
                     hasPermission('delete_user') && (<a key="update" onClick={e => remove(item.id)}><DeleteTwoTone disabled={users.length === 1} /></a>)
                   ]}>
-                    {item.isAdmin && (<span style={{color: 'red'}}>Admin </span>)}{item.name}
+                    {item.isAdmin && (<span style={{color: 'red', fontWeight: 'bold'}}>Admin </span>)}{item.name}
                   </List.Item>
                 )}
               />
@@ -75,5 +78,5 @@ export default function Page() {
         </Row>
       </Space>
 		</>
-	);
+	)
 }

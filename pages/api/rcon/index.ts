@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next/types'
 
 import RconManager from '@/lib/rcon'
-import db from '@/lib/db'
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
 
@@ -13,7 +12,7 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
       password: body.password,
     }, body.command)
 
-    res.status(200).json(result);
+    res.status(200).json(result)
   }
   
 }
