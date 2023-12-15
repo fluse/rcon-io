@@ -5,6 +5,7 @@ services:
     restart: always
     build:
       context: ./
+      dockerfile: Dockerfile
     volumes:
       - ./db:/app/db
     ports:
