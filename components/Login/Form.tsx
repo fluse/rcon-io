@@ -10,7 +10,7 @@ export default function Page({ onSubmit = () => {}}) {
 	const saveServer = async () => {
 		const values = await form.validateFields();
 
-		const response = await fetch(`http://localhost:3000/api/user/auth`, {
+		const response = await fetch(`${window.location.host}/api/user/auth`, {
 			body: JSON.stringify(values),
 			method: 'POST'
 		})

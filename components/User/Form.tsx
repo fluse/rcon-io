@@ -18,12 +18,12 @@ export default function UserForm({
 
 		let response = null
 		if (user?.id) {
-			response = await fetch(`/api/user/${user.id}`, {
+			response = await fetch(`${window.location.host}/api/user/${user.id}`, {
 				body: JSON.stringify(values),
 				method: 'PUT'
 			})
 		} else {
-			response = await fetch(`/api/user`, {
+			response = await fetch(`${window.location.host}/api/user`, {
 				body: JSON.stringify(values),
 				method: 'POST'
 			})

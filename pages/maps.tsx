@@ -19,7 +19,7 @@ export default function Page() {
   )
 
   const removeMap = async (id:String) => {
-    const response = await fetch(`/api/maps/${id}`, {
+    const response = await fetch(`${window.location.host}/api/maps/${id}`, {
 			method: 'DELETE'
 		})
 		message.open({
@@ -30,7 +30,7 @@ export default function Page() {
   }
 
   const update = async (id:string, values:any) => {
-    const response = await fetch(`/api/maps/${id}`, {
+    const response = await fetch(`${window.location.host}/api/maps/${id}`, {
 			method: 'PUT',
       body: JSON.stringify(values)
 		})

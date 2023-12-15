@@ -10,7 +10,7 @@ export default function Page({ onSubmit = () => {}}) {
 	const saveServer = async () => {
 		let values = await form.validateFields();
 		values.port = parseInt(values.port)
-		const response = await fetch(`http://localhost:3000/api/server`, {
+		const response = await fetch(`${window.location.host}/api/server`, {
 			body: JSON.stringify(values),
 			method: 'POST'
 		})

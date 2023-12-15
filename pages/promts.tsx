@@ -20,7 +20,7 @@ export default function Page() {
   )
 
   const remove = async (id:String) => {
-    const response = await fetch(`/api/promts/${id}`, {
+    const response = await fetch(`${window.location.host}/api/promts/${id}`, {
 			method: 'DELETE'
 		})
 		message.open({
@@ -31,7 +31,7 @@ export default function Page() {
   }
 
   const update = async (id:string, values:any) => {
-    const response = await fetch(`/api/promts/${id}`, {
+    const response = await fetch(`${window.location.host}/api/promts/${id}`, {
 			method: 'PUT',
       body: JSON.stringify(values)
 		})

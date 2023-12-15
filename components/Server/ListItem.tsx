@@ -10,7 +10,7 @@ const ServerListItems = ({ server }:any) => {
   const { hasPermission, setSelectedServer, refreshServerList } = useAppState()
 
 	const deleteServer = async (id:String) => {
-		const response = await fetch(`/api/server/${id}`, {
+		const response = await fetch(`${window.location.host}/api/server/${id}`, {
 			method: 'DELETE'
 		})
 

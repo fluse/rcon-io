@@ -12,7 +12,7 @@ export default function Page({ onSubmit = () => {}}) {
 	const saveMap = async () => {
 		const values = await form.validateFields();
 
-		const response = await fetch(`/api/maps`, {
+		const response = await fetch(`${window.location.host}/api/maps`, {
 			body: JSON.stringify(values),
 			method: 'POST'
 		})

@@ -79,22 +79,22 @@ export const AppStateProvider = ({ children }:any) => {
   }
 
   const refreshPromtList = async () => {
-    const result = await (await fetch(`/api/promts`)).json()
+    const result = await (await fetch(`${window.location.host}/api/promts`)).json()
 		setPromtList(result)
   }
 
   const refreshServerList = async () => {
-		const result = await (await fetch(`/api/server`)).json()
+		const result = await (await fetch(`${window.location.host}/api/server`)).json()
 		setServerlist(result)
   }
 
   const refreshMapList = async () => {
-		const result = await (await fetch(`/api/maps`)).json()
+		const result = await (await fetch(`${window.location.host}/api/maps`)).json()
 		setMapList(result)
   }
 
   const fetchUsers = async () => {
-    const result = await (await fetch(`/api/user`)).json()
+    const result = await (await fetch(`${window.location.host}/api/user`)).json()
 		setUsers(result)
   }
 

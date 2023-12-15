@@ -7,7 +7,7 @@ const RconSay = ({ server }:any) => {
   const sendMessage = async () => {
     const values = await form.validateFields()
 
-    await fetch(`http://localhost:3000/api/rcon/${server.id}`, {
+    await fetch(`${window.location.host}/api/rcon/${server.id}`, {
 			body: JSON.stringify({
         command: `say ${values.command}`
       }),

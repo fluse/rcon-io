@@ -20,12 +20,12 @@ export default function FormPromt({
 		const values = await form.validateFields()
 		let response = null
 		if (promt?.id) {
-			response = await fetch(`/api/promts/${promt.id}`, {
+			response = await fetch(`${window.location.host}/api/promts/${promt.id}`, {
 				body: JSON.stringify(values),
 				method: 'PUT'
 			})
 		} else {
-			response = await fetch(`/api/promts`, {
+			response = await fetch(`${window.location.host}/api/promts`, {
 				body: JSON.stringify(values),
 				method: 'POST'
 			})

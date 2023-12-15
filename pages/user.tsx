@@ -26,7 +26,7 @@ export default function Page() {
         content: 'Last user cannot be deleted'
       })
     }
-    const response = await fetch(`/api/user/${id}`, {
+    const response = await fetch(`${window.location.host}/api/user/${id}`, {
 			method: 'DELETE'
 		})
 		message.open({
