@@ -3,7 +3,7 @@ export interface Map {
   workshopId?: string
   filename?: string
   name: string
-  commands: string
+  commands?: string
   rating: number
 }
 
