@@ -1,13 +1,14 @@
 import { message, Input, Button, Space, Form } from 'antd'
 import { SendOutlined } from '@ant-design/icons'
+import { ApiUrl } from '@/config/api'
 
 const RconSay = ({ server }:any) => {
   const [form] = Form.useForm();
 
   const sendMessage = async () => {
     const values = await form.validateFields()
-
-    await fetch(`${window.location.host}/api/rcon/${server.id}`, {
+    
+    await fetch(ApiUrl(`/api/rcon/${server.id}`), {
 			body: JSON.stringify({
         command: `say ${values.command}`
       }),

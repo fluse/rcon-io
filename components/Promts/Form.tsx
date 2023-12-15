@@ -1,4 +1,5 @@
-import { Input, Button, Form, message, Divider, Typography } from 'antd'
+import { Input, Button, Form, message } from 'antd'
+import { ApiUrl } from '@/config/api'
 
 import { useAppState } from '@/provider/AppState'
 
@@ -20,12 +21,12 @@ export default function FormPromt({
 		const values = await form.validateFields()
 		let response = null
 		if (promt?.id) {
-			response = await fetch(`${window.location.host}/api/promts/${promt.id}`, {
+			response = await fetch(ApiUrl(`/api/promts/${promt.id}`), {
 				body: JSON.stringify(values),
 				method: 'PUT'
 			})
 		} else {
-			response = await fetch(`${window.location.host}/api/promts`, {
+			response = await fetch(ApiUrl(`/api/promts`), {
 				body: JSON.stringify(values),
 				method: 'POST'
 			})

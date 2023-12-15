@@ -1,3 +1,3 @@
-const ApiUrl = async (path:string) => {
-  return await (await fetch(`${window.location.host}${path}`)).json()
+export const ApiUrl = (path:string) => {
+  return `${window.location.protocol}://${window.location.host}${path}`
 }

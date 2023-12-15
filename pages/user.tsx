@@ -3,6 +3,8 @@ import { DeleteTwoTone } from '@ant-design/icons'
 import Head from 'next/head'
 import type { User } from '@/types'
 
+import { ApiUrl } from '@/config/api'
+
 import Content from '@/components/Content'
 import AddUserForm from '@/components/User/Form'
 import ModalUserForm from '@/components/User/Modal'
@@ -26,7 +28,8 @@ export default function Page() {
         content: 'Last user cannot be deleted'
       })
     }
-    const response = await fetch(`${window.location.host}/api/user/${id}`, {
+    
+    const response = await fetch(ApiUrl(`/api/user/${id}`), {
 			method: 'DELETE'
 		})
 		message.open({

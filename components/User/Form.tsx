@@ -1,7 +1,7 @@
 import {
-	Input, Button, Form, message, Checkbox, Divider, Typography, Switch
+	Input, Button, Form, message, Checkbox, Switch
 } from 'antd'
-
+import { ApiUrl } from '@/config/api'
 import { useAppState } from '@/provider/AppState'
 import permissions from '@/config/permissions'
 
@@ -18,12 +18,12 @@ export default function UserForm({
 
 		let response = null
 		if (user?.id) {
-			response = await fetch(`${window.location.host}/api/user/${user.id}`, {
+			response = await fetch(ApiUrl(`/api/user/${user.id}`), {
 				body: JSON.stringify(values),
 				method: 'PUT'
 			})
 		} else {
-			response = await fetch(`${window.location.host}/api/user`, {
+			response = await fetch(ApiUrl(`/api/user`), {
 				body: JSON.stringify(values),
 				method: 'POST'
 			})

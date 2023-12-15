@@ -1,6 +1,6 @@
-import { Input, Button, Form, message, Row, Col, Segmented, Divider, Typography } from 'antd'
-
-import { useAppState } from '../../provider/AppState'
+import { Input, Button, Form, message, Segmented, Divider, Typography } from 'antd'
+import { ApiUrl } from '@/config/api'
+import { useAppState } from '@/provider/AppState'
 import useLocalStorage from '@/hooks/useLocalStorage'
 
 export default function Page({ onSubmit = () => {}}) {
@@ -12,7 +12,7 @@ export default function Page({ onSubmit = () => {}}) {
 	const saveMap = async () => {
 		const values = await form.validateFields();
 
-		const response = await fetch(`${window.location.host}/api/maps`, {
+		const response = await fetch(ApiUrl('/api/maps'), {
 			body: JSON.stringify(values),
 			method: 'POST'
 		})

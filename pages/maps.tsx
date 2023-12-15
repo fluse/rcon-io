@@ -3,6 +3,8 @@ import { DeleteTwoTone, PlayCircleTwoTone } from '@ant-design/icons'
 import Head from 'next/head'
 import type { Map } from '@/types'
 
+import { ApiUrl } from '@/config/api'
+
 import Content from '@/components/Content'
 import AddMapForm from '@/components/Maps/Form'
 
@@ -19,7 +21,8 @@ export default function Page() {
   )
 
   const removeMap = async (id:String) => {
-    const response = await fetch(`${window.location.host}/api/maps/${id}`, {
+    
+    const response = await fetch(ApiUrl(`/api/maps/${id}`), {
 			method: 'DELETE'
 		})
 		message.open({
@@ -30,7 +33,7 @@ export default function Page() {
   }
 
   const update = async (id:string, values:any) => {
-    const response = await fetch(`${window.location.host}/api/maps/${id}`, {
+    const response = await fetch(ApiUrl(`/api/maps/${id}`), {
 			method: 'PUT',
       body: JSON.stringify(values)
 		})

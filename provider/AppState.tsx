@@ -6,10 +6,12 @@ import React, {
   createContext,
   useContext,
   useMemo,
-} from 'react';
+} from 'react'
 import { message } from 'antd'
 import { useInterval } from 'usehooks-ts'
 import useLocalStorage from '@/hooks/useLocalStorage'
+
+import { ApiUrl } from '@/config/api'
 
 import type { Server, User, Map, Promt } from '@/types'
 
@@ -66,8 +68,8 @@ export const AppStateProvider = ({ children }:any) => {
 
   const sendCommand = async (server:Server, promt:String) => {
     const command = promt.replace(/\n/g,';')
-
-    await fetch(`/api/rcon/${server.id}`, {
+    
+    await fetch(ApiUrl(`/api/rcon/${server.id}`), {
 			body: JSON.stringify({ command }),
 			method: 'POST'
 		})
@@ -79,22 +81,22 @@ export const AppStateProvider = ({ children }:any) => {
   }
 
   const refreshPromtList = async () => {
-    const result = await (await fetch(`${window.location.host}/api/promts`)).json()
+    const result = await (await fetch(ApiUrl(`/api/promts`))).json()
 		setPromtList(result)
   }
 
   const refreshServerList = async () => {
-		const result = await (await fetch(`${window.location.host}/api/server`)).json()
+		const result = await (await fetch(ApiUrl(`/api/server`))).json()
 		setServerlist(result)
   }
 
   const refreshMapList = async () => {
-		const result = await (await fetch(`${window.location.host}/api/maps`)).json()
+		const result = await (await fetch(ApiUrl(`/api/maps`))).json()
 		setMapList(result)
   }
 
   const fetchUsers = async () => {
-    const result = await (await fetch(`${window.location.host}/api/user`)).json()
+    const result = await (await fetch(ApiUrl(`/api/user`))).json()
 		setUsers(result)
   }
 

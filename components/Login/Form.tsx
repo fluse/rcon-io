@@ -1,6 +1,6 @@
 import { Input, Button, Form, message, Typography, Divider } from 'antd'
-
-import { useAppState } from '../../provider/AppState'
+import { ApiUrl } from '@/config/api'
+import { useAppState } from '@/provider/AppState'
 
 export default function Page({ onSubmit = () => {}}) {
 	const { refreshServerList, setLoggedInUser } = useAppState()
@@ -10,7 +10,7 @@ export default function Page({ onSubmit = () => {}}) {
 	const saveServer = async () => {
 		const values = await form.validateFields();
 
-		const response = await fetch(`${window.location.host}/api/user/auth`, {
+		const response = await fetch(ApiUrl('/api/user/auth'), {
 			body: JSON.stringify(values),
 			method: 'POST'
 		})

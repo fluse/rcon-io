@@ -1,5 +1,5 @@
 import { Input, Button, Form, message, Row, Col } from 'antd'
-
+import { ApiUrl } from '@/config/api'
 import { useAppState } from '@/provider/AppState'
 
 export default function Page({ onSubmit = () => {}}) {
@@ -10,7 +10,8 @@ export default function Page({ onSubmit = () => {}}) {
 	const saveServer = async () => {
 		let values = await form.validateFields();
 		values.port = parseInt(values.port)
-		const response = await fetch(`${window.location.host}/api/server`, {
+
+		const response = await fetch(ApiUrl(`/api/server`), {
 			body: JSON.stringify(values),
 			method: 'POST'
 		})

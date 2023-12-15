@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar, Card, Popconfirm, message } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
-
+import { ApiUrl } from '@/config/api'
 import RconSay from '@/components/RCON/Say'
 import { useAppState } from '@/provider/AppState'
 import ModalServerManage from './Manage'
@@ -10,7 +10,7 @@ const ServerListItems = ({ server }:any) => {
   const { hasPermission, setSelectedServer, refreshServerList } = useAppState()
 
 	const deleteServer = async (id:String) => {
-		const response = await fetch(`${window.location.host}/api/server/${id}`, {
+		const response = await fetch(ApiUrl(`/api/server/${id}`), {
 			method: 'DELETE'
 		})
 

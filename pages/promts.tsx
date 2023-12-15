@@ -3,6 +3,8 @@ import { DeleteTwoTone, PlayCircleTwoTone } from '@ant-design/icons'
 import Head from 'next/head'
 import type { Promt } from '@/types'
 
+import { ApiUrl } from '@/config/api'
+
 import Content from '@/components/Content'
 import FormCommands from '@/components/Promts/Form'
 import ModalPromt from '@/components/Promts/Modal'
@@ -20,7 +22,8 @@ export default function Page() {
   )
 
   const remove = async (id:String) => {
-    const response = await fetch(`${window.location.host}/api/promts/${id}`, {
+    
+    const response = await fetch(ApiUrl(`/api/promts/${id}`), {
 			method: 'DELETE'
 		})
 		message.open({
@@ -31,7 +34,7 @@ export default function Page() {
   }
 
   const update = async (id:string, values:any) => {
-    const response = await fetch(`${window.location.host}/api/promts/${id}`, {
+    const response = await fetch(ApiUrl(`/api/promts/${id}`), {
 			method: 'PUT',
       body: JSON.stringify(values)
 		})
