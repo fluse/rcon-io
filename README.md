@@ -4,16 +4,15 @@
 
 A simple, but useful web panel to control CS2 servers via RCON
 
-
 Have a look at these CS2 Server Docker-Images
 - [joedwards32/CS2](https://github.com/joedwards32/CS2)
-
+- [Soren90/cs2-docker](https://github.com/Soren90/cs2-docker)
 
 ### Features
-- Add Servers
-- Add Users
-- Add Map from Workshop
-- Create Commands
+- Server Management
+- Map Management with Workshop Support
+- User & Permissions System
+- Clustered Commands as Promts
 
 
 ## How to Use

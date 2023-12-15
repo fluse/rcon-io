@@ -3,59 +3,99 @@ export const DefaultMaps = [{
   name: 'de_dust2',
   filename: 'de_dust2',
   commands: '',
-  rating: 0
+  rating: 4.5
 }, {
   id: 'de_anubis',
   name: 'de_anubis',
   filename: 'de_anubis',
   commands: '',
-  rating: 0
+  rating: 2.5
 }, {
   id: 'de_vertigo',
   name: 'de_vertigo',
   filename: 'de_vertigo',
   commands: '',
-  rating: 0
+  rating: 3
 }, {
   id: 'de_ancient',
   name: 'de_ancient',
   filename: 'de_ancient',
   commands: '',
-  rating: 0
+  rating: 3.5
 }, {
   id: 'de_inferno',
   name: 'de_inferno',
   filename: 'de_inferno',
   commands: '',
-  rating: 0
+  rating: 4
 }, {
   id: 'de_nuke',
   name: 'de_nuke',
   filename: 'de_nuke',
   commands: '',
-  rating: 0
+  rating: 4
 }, {
   id: 'de_overpass',
   name: 'de_overpass',
   filename: 'de_overpass',
   commands: '',
-  rating: 0
+  rating: 3.5
 }, {
   id: 'de_mirage',
   name: 'de_mirage',
   filename: 'de_mirage',
   commands: '',
-  rating: 0
+  rating: 2.5
 }, {
   id: 'cs_italy',
   name: 'cs_italy',
   filename: 'cs_italy',
   commands: '',
-  rating: 0
+  rating: 2.5
 }, {
   id: 'cs_office',
   name: 'cs_office',
   filename: 'cs_office',
   commands: '',
-  rating: 0
+  rating: 3
+}, {
+  name: 'fy_pool_day',
+  workshopId: '3070923343',
+  id: 'l7WaNB',
+  rating: 5
+}, {
+  name: 'Bounce',
+  workshopId: '3088183343',
+  id: 'zrqeOa',
+  rating: 4.5
+}, {
+  name: 'fy_poolparty_oser',
+  workshopId: '3084690440',
+  id: 'nC9N1N',
+  rating: 5
+}, {
+  name: 'Aim Ancient Night',
+  workshopId: '3090340064',
+  id: 'n1Jn21',
+  rating: 5
+}, {
+  name: 'Aim_Long(Dust)',
+  workshopId: '3082605693',
+  id: 'n1Jn21',
+  rating: 5
+}, {
+  name: 'de_train',
+  workshopId: '3070284539',
+  id: 'KDfn82',
+  rating: 5
+}, {
+  name: 'de_cache',
+  workshopId: '3070244931',
+  id: 'N82KD2',
+  rating: 5
+}, {
+  name: 'awp_india',
+  workshopId: '3070290869',
+  id: 'N82KD2',
+  rating: 5
 }]

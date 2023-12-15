@@ -17,7 +17,7 @@ const PageLayout = ({ children }:any) => {
   const { hasPermission, serverList, loggedInUser, selectedServer, setSelectedServer } = useAppState()
 
   message.config({
-    top: 100,
+    top: 10,
     duration: 2,
     maxCount: 1,
   });

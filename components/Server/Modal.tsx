@@ -13,7 +13,7 @@ const CreateServerModal = () => {
   return (
     <>
       <Button type='link' icon={<PlusSquareTwoTone />} onClick={showModal}>
-        Server
+        add Server
       </Button>
       <Modal title="Add Server" footer={null} open={isModalOpen} onCancel={handleCancel}>
         <Divider />

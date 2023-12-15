@@ -3,6 +3,7 @@ import {
 } from 'antd'
 
 import { useAppState } from '@/provider/AppState'
+import permissions from '@/config/permissions'
 
 export default function UserForm({
 	user = null, onSubmit = () => {},
@@ -52,7 +53,7 @@ export default function UserForm({
 				<Switch defaultValue={false} />
       </Form.Item>
 			<Form.Item label="Permissions" name="permissions">
-				<Checkbox.Group options={['modify_user', 'modify_server', 'modify_maps', 'modify_promts']} defaultValue={[]} />
+				<Checkbox.Group options={permissions} defaultValue={[]} />
 			</Form.Item>
       <Button type="primary" htmlType="submit" onClick={save}>{buttonText}</Button>
     </Form>

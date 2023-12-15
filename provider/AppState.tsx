@@ -64,7 +64,9 @@ export const AppStateProvider = ({ children }:any) => {
     return loggedInUser?.permissions?.includes(permission) || false
   }
 
-  const sendCommand = async (server:Server, command:String) => {
+  const sendCommand = async (server:Server, promt:String) => {
+    const command = promt.replace(/\n/g,';')
+
     await fetch(`/api/rcon/${server.id}`, {
 			body: JSON.stringify({ command }),
 			method: 'POST'
@@ -72,7 +74,7 @@ export const AppStateProvider = ({ children }:any) => {
 
     message.open({
       type: 'success',
-      content: `Send!`
+      content: `Command send to ${server.name}`
     })
   }
 

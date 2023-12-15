@@ -1,7 +1,7 @@
 import { useAppState } from '@/provider/AppState'
 import { Form } from 'antd'
 
-import { Warmup, Test } from '@/config/promts'
+import { Test } from '@/config/promts'
 
 import StyledTag from '../Promts/Tag'
 

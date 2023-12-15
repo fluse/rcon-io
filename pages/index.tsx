@@ -3,7 +3,7 @@ import { Card, Statistic } from 'antd';
 import { useAppState } from '@/provider/AppState';
 
 export default function Home() {
-	const { mapList, serverList, users } = useAppState()
+	const { mapList, serverList, users, promtList } = useAppState()
 
 	const gridStyles = {
 		display: 'inline-grid',
@@ -20,12 +20,12 @@ export default function Home() {
 
 			<div style={gridStyles}>
 
-					<Card bordered={false} style={{display: 'block', width: '100%'}}>
-						<Statistic
-							title="Server"
-							value={serverList.length}
-						/>
-					</Card>
+				<Card bordered={false} style={{display: 'block', width: '100%'}}>
+					<Statistic
+						title="Server"
+						value={serverList.length}
+					/>
+				</Card>
 
 				<Card bordered={false} style={{width: '100%'}}>
 					<Statistic
@@ -41,6 +41,13 @@ export default function Home() {
 					/>
 				</Card>
 
+				<Card bordered={false}>
+					<Statistic
+						title="Promts"
+						value={promtList.length}
+					/>
+				</Card>
+				
 			</div>
 		</>
 	)

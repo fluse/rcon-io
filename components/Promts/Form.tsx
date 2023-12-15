@@ -6,12 +6,18 @@ export default function FormPromt({
 	promt = null, onSubmit = () => {},
 	buttonText = 'create'
 }:any) {
-	const { hasPermission, refreshPromtList } = useAppState()
+	const { selectedServer, sendCommand, hasPermission, refreshPromtList } = useAppState()
 
 	const [form] = Form.useForm()
 
+	const testCommand = async () => {
+		const values = await form.validateFields()
+
+		sendCommand(selectedServer, values.promt)
+	}
+
 	const save = async () => {
-		const values = await form.validateFields();
+		const values = await form.validateFields()
 		let response = null
 		if (promt?.id) {
 			response = await fetch(`/api/promts/${promt.id}`, {
@@ -48,6 +54,7 @@ export default function FormPromt({
 				/>
       </Form.Item>
       <Button type="primary" htmlType="submit" onClick={save}>{buttonText}</Button>
+			<Button disabled={!selectedServer} type="link" onClick={testCommand}>test</Button>
     </Form>
 	)
 }

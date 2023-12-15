@@ -1,8 +1,8 @@
 const permissions =  [
   'modify_user',
   'modify_server',
-  'send_commands',
-  'change_map',
+  'modify_maps',
+  'modify_promts'
 ]
 
 export default permissions
