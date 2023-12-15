@@ -1,12 +1,11 @@
 version: '3.8'
 services:
-  web:
+  rcon-io:
+    container_name: rcon-io
+    restart: always
     build:
       context: ./
-      target: runner
     volumes:
-      - .:/app
+      - ./db:/app/db
     ports:
       - 3000:3000
-    environment:
-      NODE_ENV: development

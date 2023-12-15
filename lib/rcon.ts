@@ -2,7 +2,7 @@ import Rcon from 'rcon-srcds'
 
 import type { Server } from '@/types'
 
-import db from './db'
+import db from '@/lib/db'
 
 class RconClient {
   isReady: boolean

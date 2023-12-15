@@ -1,6 +1,6 @@
 {
   "name": "rcon-io",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "private": true,
   "scripts": {
     "dev": "next dev",

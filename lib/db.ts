@@ -17,4 +17,4 @@ const defaultData:DatabaseSchema = {
   }]
 }
 
-export default await JSONPreset<DatabaseSchema>('./db.json', defaultData)
+export default await JSONPreset<DatabaseSchema>('./db/db.json', defaultData)
