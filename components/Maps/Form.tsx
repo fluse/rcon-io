@@ -3,8 +3,8 @@ import { ApiUrl } from '@/config/api'
 import { useAppState } from '@/provider/AppState'
 import useLocalStorage from '@/hooks/useLocalStorage'
 
-export default function Page({ onSubmit = () => {}}) {
-	const { refreshMapList } = useAppState()
+export default function FormMap({ onSubmit = () => {}}) {
+	const { hasPermission, refreshMapList } = useAppState()
 	const [mapType, setMapType] = useLocalStorage('mapType', 'Workshop')
 
 	const [form] = Form.useForm()
@@ -30,7 +30,7 @@ export default function Page({ onSubmit = () => {}}) {
 	}
 
 	return (
-    <Form form={form} layout="vertical">
+    <Form disabled={!hasPermission('create_map')} form={form} layout="vertical">
 			<Typography.Title level={4} style={{ marginTop: 0}}>Add Map to List</Typography.Title>
 			<Divider />
 			<Segmented options={['Workshop', 'File']} value={mapType} onChange={setMapType} />

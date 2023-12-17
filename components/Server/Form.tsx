@@ -1,20 +1,38 @@
-import { Input, Button, Form, message, Row, Col } from 'antd'
+import { useEffect } from 'react'
+import { Input, Button, Form, message, Row, Col, InputNumber } from 'antd'
 import { ApiUrl } from '@/config/api'
 import { useAppState } from '@/provider/AppState'
 
-export default function Page({ onSubmit = () => {}}) {
+export default function FormServer({
+	server = null,
+	type = 'add',
+	onSubmit = () => {},
+	buttonText = 'create'
+}:any) {
 	const { hasPermission, refreshServerList } = useAppState()
 
 	const [form] = Form.useForm()
+
+	useEffect(() => {
+		form.setFieldsValue(server)
+	}, [form, server])
 
 	const saveServer = async () => {
 		let values = await form.validateFields();
 		values.port = parseInt(values.port)
 
-		const response = await fetch(ApiUrl(`/api/server`), {
-			body: JSON.stringify(values),
-			method: 'POST'
-		})
+		let response = null
+		if (server?.id) {
+			response = await fetch(ApiUrl(`/api/server/${server?.id}`), {
+				body: JSON.stringify(values),
+				method: 'PUT'
+			})
+		} else {
+			response = await fetch(ApiUrl(`/api/server`), {
+				body: JSON.stringify(values),
+				method: 'POST'
+			})
+		}
 
 		if (response.status !== 200) {
 			message.open({
@@ -29,7 +47,7 @@ export default function Page({ onSubmit = () => {}}) {
 	}
 
 	return (
-    <Form disabled={!hasPermission('modify_server')}  form={form} layout="vertical">
+    <Form disabled={!hasPermission('modify_server')} initialValues={server} form={form} layout="vertical">
       <Form.Item label="Name" name="name" required rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -41,14 +59,14 @@ export default function Page({ onSubmit = () => {}}) {
 				</Col>
 				<Col flex="130px">
 					<Form.Item label="Port" name="port" required rules={[{ required: true }]}>
-						<Input />
+						<InputNumber />
 					</Form.Item>
 				</Col>
 			</Row>
-      <Form.Item label="RCON Password" name="rcon" required rules={[{ required: true }]}>
-        <Input />
+      <Form.Item label="RCON Password" name="rcon" required rules={[{ required: type === 'add' }]}>
+        <Input.Password />
       </Form.Item>
-      <Button type="primary" htmlType="submit" onClick={saveServer}>add Server</Button>
+      <Button type="primary" htmlType="submit" onClick={saveServer}>{buttonText}</Button>
     </Form>
-	);
+	)
 }

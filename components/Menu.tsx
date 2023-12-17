@@ -1,4 +1,4 @@
-import { Layout, Menu } from 'antd'
+import { Menu } from 'antd'
 import { useRouter } from 'next/router'
 import {
   DatabaseTwoTone,
@@ -6,9 +6,8 @@ import {
   HomeTwoTone,
   PictureTwoTone,
   BoxPlotTwoTone,
-} from '@ant-design/icons';
+} from '@ant-design/icons'
 
-const { Header, Sider } = Layout;
 const PageMenu = () => {
   const router = useRouter()
 
@@ -50,7 +49,7 @@ const PageMenu = () => {
         theme="light"
         mode="horizontal"
         onClick={handleClick}
-        defaultSelectedKeys={['']}
+        defaultSelectedKeys={[router.asPath.replace('/', '')]}
         items={items}
         style={{flexGrow: '1'}}
       />

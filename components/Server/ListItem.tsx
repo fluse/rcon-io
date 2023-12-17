@@ -5,9 +5,10 @@ import { ApiUrl } from '@/config/api'
 import RconSay from '@/components/RCON/Say'
 import { useAppState } from '@/provider/AppState'
 import ModalServerManage from './Manage'
+import ServerFormModal from './Modal'
 
 const ServerListItems = ({ server }:any) => {
-  const { hasPermission, setSelectedServer, refreshServerList } = useAppState()
+  const { hasPermission, refreshServerList } = useAppState()
 
 	const deleteServer = async (id:String) => {
 		const response = await fetch(ApiUrl(`/api/server/${id}`), {
@@ -27,7 +28,12 @@ const ServerListItems = ({ server }:any) => {
   ]
 
   if (hasPermission('modify_server')) actions.push(<ModalServerManage key="dfaef" server={server} />)
-  if (hasPermission('modify_server')) actions.push(
+
+  const extras = []
+  if (hasPermission('modify_server')) extras.push(
+    <ServerFormModal buttonText="" server={server} type="update" />
+  )
+  if (hasPermission('modify_server')) extras.push(
     <Popconfirm
       key="confirm"
       placement="left"
@@ -40,15 +46,15 @@ const ServerListItems = ({ server }:any) => {
   )
 
   return (
-    <Card actions={actions}>
+    <Card size="small" actions={actions} extra={extras}>
       <Card.Meta
         avatar={<Avatar src={`https://api.dicebear.com/7.x/shapes/svg?seed=${server.name}`} />}
         title={server.name}
         description={`${server.host}:${server.port}`}
       />
-      <RconSay server={server} />
+      {hasPermission('modify_server') && <RconSay server={server} />}
     </Card>
   )
 }
 
-export default ServerListItems;
+export default ServerListItems

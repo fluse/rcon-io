@@ -43,7 +43,7 @@ export default function Page() {
 				</Form.Item>
 				<Form.Item>
 					<Input.Search
-						placeholder="search for server name"
+						placeholder="search for server"
 						onChange={e => setSearch(e.target.value)}
 						value={search}
 						allowClear

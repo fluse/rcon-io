@@ -3,7 +3,6 @@ import type { User } from '../../../types'
 
 import db from '../../../lib/db'
 
-
 export default async function handler(req:NextApiRequest, res:NextApiResponse) {
 
   if (req.method === 'PUT') {
@@ -13,6 +12,10 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     if (!user) res.status(404).json(null)
 
     const body = JSON.parse(req.body)
+
+    // fill current pw if no changes
+    if (!body.password || body.password.length === 0) body.password === user.password
+
     user = Object.assign(user, body)
     await db.write()
     res.status(200).json(user)

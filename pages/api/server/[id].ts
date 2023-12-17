@@ -18,8 +18,13 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     let server = db.data.servers.find((item:Server) => item.id === id)
 
     if (!server) return res.status(404).json(null)
-    
-    server = Object.assign(server, req.body)
+
+    const body = JSON.parse(req.body)
+
+    // fill current pw if no changes
+    if (!body.rcon || body.rcon.length === 0) body.rcon === server.rcon
+
+    server = Object.assign(server, body)
     await db.write()
     res.status(200).json(server)
   }

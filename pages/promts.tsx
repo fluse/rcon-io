@@ -1,4 +1,4 @@
-import { message, Row, Col, List, Space, Input, Rate, Button } from 'antd'
+import { message, Row, Col, List, Space, Input, Popconfirm, Button } from 'antd'
 import { DeleteTwoTone, PlayCircleTwoTone } from '@ant-design/icons'
 import Head from 'next/head'
 import type { Promt } from '@/types'
@@ -73,10 +73,20 @@ export default function Page() {
                 dataSource={filteredList}
                 renderItem={(item:Promt) => (
                   <List.Item actions={[
-                    hasPermission('modify_promts') && (<ModalPromt promt={item} />),
-                    <a key="df" onClick={e => remove(item.id)}><DeleteTwoTone /></a>,
+                    hasPermission('run_promts') && (<ModalPromt promt={item} />),
+                    hasPermission('delete_promts') && (
+                      <Popconfirm
+                        key="confirm"
+                        placement="left"
+                        title="Please Confirm"
+                        description="Should the promt be permanently deleted?"
+                        onConfirm={_ => remove(item.id)}
+                      >
+                        <DeleteTwoTone />
+                      </Popconfirm>
+                    ),
                   ]}>
-                    <Button type="link" onClick={_ => sendCommand(selectedServer, item.promt)}icon={<PlayCircleTwoTone />} />{item.name}
+                    {hasPermission('modify_promts') && selectedServer && <Button type="link" onClick={_ => sendCommand(selectedServer, item.promt)}icon={<PlayCircleTwoTone />} />}{item.name}
                   </List.Item>
                 )}
               />

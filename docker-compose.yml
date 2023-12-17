@@ -9,3 +9,4 @@ services:
       - ./db:/app/db
     ports:
       - 1337:3000
+    network_mode: host

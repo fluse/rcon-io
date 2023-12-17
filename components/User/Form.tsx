@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
 	Input, Button, Form, message, Checkbox, Switch
 } from 'antd'
@@ -6,13 +7,20 @@ import { useAppState } from '@/provider/AppState'
 import permissions from '@/config/permissions'
 
 export default function UserForm({
-	user = null, onSubmit = () => {},
+	user = null,
+	onSubmit = () => {},
 	buttonText = 'create'
 }:any) {
 	const { hasPermission, fetchUsers } = useAppState()
 
 	const [form] = Form.useForm()
 
+	const isAdmin = Form.useWatch('isAdmin', form)
+
+	useEffect(() => {
+		form.setFieldsValue(user)
+	}, [form, user])
+	
 	const save = async () => {
 		const values = await form.validateFields();
 
@@ -42,18 +50,18 @@ export default function UserForm({
 	}
 
 	return (
-    <Form initialValues={user} disabled={!hasPermission('modify_user')} form={form} layout="vertical">
+    <Form initialValues={user} disabled={!hasPermission('create_user')} form={form} layout="vertical">
       <Form.Item label="Name" name="name" required rules={[{ required: true }]}>
         <Input />
       </Form.Item>
-			<Form.Item label="Password" name="password" required rules={[{ required: true }]}>
+			<Form.Item label="Password" name="password" required rules={[{ required: !user?.id }]}>
         <Input.Password />
       </Form.Item>
 			<Form.Item label="is admin?" name="isAdmin">
 				<Switch defaultValue={false} />
       </Form.Item>
 			<Form.Item label="Permissions" name="permissions">
-				<Checkbox.Group options={permissions} defaultValue={[]} />
+				<Checkbox.Group disabled={isAdmin} options={permissions} defaultValue={[]} />
 			</Form.Item>
       <Button type="primary" htmlType="submit" onClick={save}>{buttonText}</Button>
     </Form>

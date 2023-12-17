@@ -1,4 +1,4 @@
-import { message, Button, Row, Col, List, Space, Input, Rate } from 'antd'
+import { message, Button, Row, Col, List, Popconfirm, Space, Input, Rate } from 'antd'
 import { DeleteTwoTone, PlayCircleTwoTone } from '@ant-design/icons'
 import Head from 'next/head'
 import type { Map } from '@/types'
@@ -14,7 +14,7 @@ import useLocalStorage from '@/hooks/useLocalStorage'
 
 export default function Page() {
   const [search, setSearch] = useLocalStorage('mapSearch', '')
-	const { mapList, refreshMapList, sendCommand, selectedServer } = useAppState()
+	const { hasPermission, mapList, refreshMapList, sendCommand, selectedServer } = useAppState()
 
   const filteredMap = mapList.filter(
     (map:Map) => map.name.toLowerCase().includes(search.toLowerCase())
@@ -84,9 +84,22 @@ export default function Page() {
                     <Rate key="rating" allowHalf defaultValue={item.rating} onChange={rating => update(item.id, {
                       rating
                     })} />,
-                    <a key="df" onClick={e => removeMap(item.id)}><DeleteTwoTone /></a>
+                    hasPermission('remove_map') && (
+                      <Popconfirm
+                        key="confirm"
+                        placement="left"
+                        title="Please Confirm"
+                        description="Should the map be permanently deleted?"
+                        onConfirm={_ => removeMap(item.id)}
+                      >
+                        <DeleteTwoTone />
+                      </Popconfirm>
+                    )
                   ]}>
-                    <Button type="link" onClick={_ => changeMap(item)}icon={<PlayCircleTwoTone />} />{item.name}
+                    {selectedServer && (
+                      <Button type="link" onClick={_ => changeMap(item)}icon={<PlayCircleTwoTone />} /> 
+                    )}
+                    {item.name}
                   </List.Item>
                 )}
               />

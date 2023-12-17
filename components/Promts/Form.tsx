@@ -1,15 +1,21 @@
+import { useEffect } from 'react'
 import { Input, Button, Form, message } from 'antd'
 import { ApiUrl } from '@/config/api'
 
 import { useAppState } from '@/provider/AppState'
 
 export default function FormPromt({
-	promt = null, onSubmit = () => {},
+	promt = null,
+	onSubmit = () => {},
 	buttonText = 'create'
 }:any) {
 	const { selectedServer, sendCommand, hasPermission, refreshPromtList } = useAppState()
 
 	const [form] = Form.useForm()
+
+	useEffect(() => {
+		form.setFieldsValue(promt)
+	}, [form, promt])	
 
 	const testCommand = async () => {
 		const values = await form.validateFields()
@@ -44,7 +50,7 @@ export default function FormPromt({
 	}
 
 	return (
-    <Form initialValues={promt} disabled={!hasPermission('modify_promts')} form={form} layout="vertical">
+    <Form initialValues={promt} disabled={!hasPermission('create_promts')} form={form} layout="vertical">
       <Form.Item label="Name" name="name" required rules={[{ required: true }]}>
         <Input />
       </Form.Item>
@@ -55,7 +61,9 @@ export default function FormPromt({
 				/>
       </Form.Item>
       <Button type="primary" htmlType="submit" onClick={save}>{buttonText}</Button>
-			<Button disabled={!selectedServer} type="link" onClick={testCommand}>test</Button>
+			{hasPermission('create_promts') && (
+				<Button disabled={!selectedServer} type="link" onClick={testCommand}>test</Button>
+			)}
     </Form>
 	)
 }
