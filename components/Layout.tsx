@@ -58,7 +58,7 @@ const PageLayout = ({ children }:any) => {
               options={options}
               style={selectionStyles}
               onChange={id => setSelectedServer(serverList.find((item:Server) => item.id === id))}
-              value={selectedServer?.id}
+              value={serverList.length > 0 ? selectedServer?.id : null}
               placeholder="Select Server"
             />
             <Logout />

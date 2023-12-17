@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  rcon-io:
+  web:
     container_name: rcon-io
     restart: always
     build:
@@ -8,5 +8,4 @@ services:
     volumes:
       - ./db:/app/db
     ports:
-      - 1337:3000
-    network_mode: host
+      - 3000:3000

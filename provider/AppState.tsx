@@ -118,6 +118,15 @@ export const AppStateProvider = ({ children }:any) => {
     }
   }, [loggedInUser])
 
+  useEffect(() => {
+    if (serverList.length > 0 && !!selectedServer) {
+      const result = serverList.find((server:Server) => server.id === selectedServer?.id)
+      if (!result) {
+        setSelectedServer(null)
+      }
+    }
+  }, [selectedServer, serverList])
+
   const state = useMemo(() => ({
     users, fetchUsers, 
     serverList, refreshServerList,
