@@ -5,9 +5,10 @@ import { useAppState } from '@/provider/AppState'
 import RconSay from '@/components/RCON/Say'
 import RconTeams from '@/components/RCON/Teams'
 import RconMaps from '@/components/RCON/Maps'
+import ServerLog from '@/components/Server/Manage/Log'
 
 const ModalServerManage = ({ server }:any) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const showModal = () => setIsModalOpen(true)
 

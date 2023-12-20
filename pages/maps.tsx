@@ -46,6 +46,7 @@ export default function Page() {
 
   const changeMap = (map:Map) => {
     let command = `host_workshop_map ${map.workshopId}`
+
     if (!('workshopId' in map)) {
       command = `map ${map.filename}`
     }

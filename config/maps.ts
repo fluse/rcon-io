@@ -103,4 +103,9 @@ export const DefaultMaps = [{
   workshopId: '3075725935',
   id: 'HL12JN',
   rating: 3.5
+}, {
+  name: 'fall_guys',
+  workshopId: '3117949163',
+  id: 'HL12JN',
+  rating: 5
 }]
