@@ -3,75 +3,88 @@ export const DefaultMaps = [{
   name: 'de_dust2',
   filename: 'de_dust2',
   commands: '',
+  mode: 'defuse',
   rating: 4.5
 }, {
   id: 'de_anubis',
   name: 'de_anubis',
   filename: 'de_anubis',
   commands: '',
+  mode: 'defuse',
   rating: 2.5
 }, {
   id: 'de_vertigo',
   name: 'de_vertigo',
   filename: 'de_vertigo',
   commands: '',
+  mode: 'defuse',
   rating: 3
 }, {
   id: 'de_ancient',
   name: 'de_ancient',
   filename: 'de_ancient',
   commands: '',
+  mode: 'defuse',
   rating: 3.5
 }, {
   id: 'de_inferno',
   name: 'de_inferno',
   filename: 'de_inferno',
   commands: '',
+  mode: 'defuse',
   rating: 4
 }, {
   id: 'de_nuke',
   name: 'de_nuke',
   filename: 'de_nuke',
   commands: '',
+  mode: 'defuse',
   rating: 4
 }, {
   id: 'de_overpass',
   name: 'de_overpass',
   filename: 'de_overpass',
   commands: '',
+  mode: 'defuse',
   rating: 3.5
 }, {
   id: 'de_mirage',
   name: 'de_mirage',
   filename: 'de_mirage',
   commands: '',
+  mode: 'defuse',
   rating: 2.5
 }, {
   id: 'cs_italy',
   name: 'cs_italy',
   filename: 'cs_italy',
   commands: '',
+  mode: 'hostage',
   rating: 2.5
 }, {
   id: 'cs_office',
   name: 'cs_office',
   filename: 'cs_office',
   commands: '',
+  mode: 'hostage',
   rating: 3
 }, {
   name: 'fy_pool_day',
   workshopId: '3070923343',
   id: 'l7WaNB',
+  mode: 'funyard',
   rating: 5
 }, {
   name: 'Bounce',
   workshopId: '3088183343',
   id: 'zrqeOa',
+  mode: 'funyard',
   rating: 4.5
 }, {
   name: 'fy_poolparty_oser',
   workshopId: '3084690440',
   id: 'nC9N1N',
+  mode: 'funyard',
   rating: 5
 }, {
   name: 'Aim Ancient Night',
@@ -109,3 +122,32 @@ export const DefaultMaps = [{
   id: 'HL12JN',
   rating: 5
 }]
+
+export const MAP_TYPE_LIST = [{
+  value: 'defuse',
+  label: 'de - defuse',
+}, {
+  value: 'hostage',
+  label: 'cs - hostage',
+}, {
+  value: 'funyard',
+  label: 'fy - funyard',
+}, {
+  value: 'surf',
+  label: 'surf',
+}, {
+  value: 'wingman',
+  label: 'wingman',
+}, {
+  value: 'climbing',
+  label: 'kz - climbing',
+}, {
+  value: 'armsrace',
+  label: 'ar - armsrace',
+}, {
+  value: 'deathmatch',
+  label: 'deathmatch',
+}, {
+  value: 'aim',
+  label: 'aim',
+}];

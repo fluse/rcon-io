@@ -1,7 +1,8 @@
-import { Input, Button, Form, message, Segmented, Divider, Typography } from 'antd'
+import { Input, Button, Form, message, Segmented, Divider, Typography, Select } from 'antd'
 import { ApiUrl } from '@/config/api'
 import { useAppState } from '@/provider/AppState'
 import useLocalStorage from '@/hooks/useLocalStorage'
+import { MAP_TYPE_LIST } from '@/config/maps'
 
 export default function FormMap({ onSubmit = () => {}}) {
 	const { hasPermission, refreshMapList } = useAppState()
@@ -37,6 +38,9 @@ export default function FormMap({ onSubmit = () => {}}) {
 			<Divider />
       <Form.Item label="Name" name="name" required rules={[{ required: true }]}>
         <Input />
+      </Form.Item>
+			<Form.Item label="Best for Gamemode" name="mode" required rules={[{ required: true }]}>
+        <Select options={MAP_TYPE_LIST} />
       </Form.Item>
       <Form.Item hidden={mapType === 'File'} label="Steam Workshop ID" name="workshopId" required extra={<a href="https://steamcommunity.com/app/730/workshop/" target="_blank">Steam Workshop</a>} rules={[{ required: mapType === 'Workshop' }]}>
         <Input />

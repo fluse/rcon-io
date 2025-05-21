@@ -1,4 +1,4 @@
-import { message, Button, Row, Col, List, Popconfirm, Space, Input, Rate } from 'antd'
+import { message, Button, Row, Col, List, Popconfirm, Space, Input, Rate, Tag } from 'antd'
 import { DeleteTwoTone, PlayCircleTwoTone } from '@ant-design/icons'
 import Head from 'next/head'
 import type { Map } from '@/types'
@@ -81,6 +81,7 @@ export default function Page() {
                 dataSource={filteredMap}
                 renderItem={(item:Map) => (
                   <List.Item actions={[
+                    ('mode' in item) ? <Tag key="mode">{item.mode}</Tag> : null,
                     <a key="workshop" hidden={!('workshopId' in item)} href={`https://steamcommunity.com/sharedfiles/filedetails/?id=${item.workshopId}`} target="_blank">Workshop</a>,
                     <Rate key="rating" allowHalf defaultValue={item.rating} onChange={rating => update(item.id, {
                       rating

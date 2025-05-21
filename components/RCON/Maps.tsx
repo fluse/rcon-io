@@ -5,7 +5,6 @@ const RconTeams = ({ server }:any) => {
   const { mapList, sendCommand } = useAppState()
 
   const changeMap = (value:any, selected:any) => {
-    console.log(value, selected)
     let command = `host_workshop_map ${selected.workshopId}`
     if (!('workshopId' in selected)) {
       command = `map ${selected.value}`
@@ -19,9 +18,6 @@ const RconTeams = ({ server }:any) => {
     ...map
   }))
 
-  const filterOption = (input: string, option?: { label: string; value: string }) =>
-  (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
-
   return (
     <>
       <Space style={{ paddingTop: '10px', display: 'block', width: '100%' }}>
@@ -30,6 +26,7 @@ const RconTeams = ({ server }:any) => {
           options={options}
           onChange={changeMap}
           showSearch
+          optionFilterProp='label'
           placeholder="Change map"
           style={{ display: 'block', width: '100%' }}
         />

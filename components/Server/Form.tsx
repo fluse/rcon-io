@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Input, Button, Form, message, Row, Col, InputNumber } from 'antd'
 import { ApiUrl } from '@/config/api'
 import { useAppState } from '@/provider/AppState'
@@ -46,8 +46,13 @@ export default function FormServer({
     onSubmit()
 	}
 
+	const enrichedServer = {
+		port: 27015,
+		...server
+	}
+
 	return (
-    <Form disabled={!hasPermission('modify_server')} initialValues={server} form={form} layout="vertical">
+    <Form disabled={!hasPermission('modify_server')} initialValues={enrichedServer} form={form} layout="vertical">
       <Form.Item label="Name" name="name" required rules={[{ required: true }]}>
         <Input />
       </Form.Item>

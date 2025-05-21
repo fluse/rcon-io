@@ -13,7 +13,7 @@ Have a look at these CS2 Server Docker-Images
 - Map Management with Workshop Support
 - User & Permissions System
 - Clustered Commands as Promts
-
+- Upcoming - Automations
 
 ## How to Use
 

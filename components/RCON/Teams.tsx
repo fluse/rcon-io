@@ -1,5 +1,5 @@
 import { useAppState } from '@/provider/AppState'
-import { Form } from 'antd'
+import { Divider, Form } from 'antd'
 
 import { Test } from '@/config/promts'
 
@@ -34,7 +34,7 @@ const RconTeams = ({ server }:any) => {
       promt: 'bot_kick'
     }]
   }, {
-    name: 'Game Mode',
+    name: 'Game Modes',
     items: [{
         text: 'Casual',
         promt: 'game_type 0; game_mode 0;mp_restartgame 1;'
@@ -44,6 +44,12 @@ const RconTeams = ({ server }:any) => {
     }, {
       text: 'Competitve',
       promt: 'game_type 0; game_mode 1;mp_restartgame 1'
+    }, {
+      text: 'Wingman',
+      promt: 'game_type 0; game_mode 2;mp_restartgame 1'
+    }, {
+      text: 'Armsrace',
+      promt: 'game_type 1; game_mode 0;mp_randomspawn 1;mp_randomspawn_los 1;mp_restartgame 1'
     }]
   }, {
     name: 'Configs',
@@ -78,14 +84,47 @@ const RconTeams = ({ server }:any) => {
         text: 'off',
         promt: 'mp_damage_headshot_only 0;say Headshot Only: Off;'
     }]
+  }, {
+    name: 'Player Speed',
+    items: [{
+      text: 'Bullettime',
+      promt: 'host_timescale 0.5;'
+    }, {
+      text: 'Normal',
+      promt: 'host_timescale 1;'
+    }, {
+      text: 'Fast',
+      promt: 'host_timescale 1.3;'
+    }, {
+      text: 'Highspeed',
+      promt: 'host_timescale 1.6;'
+    }]
+  }, {
+    name: 'Chicken',
+    items: [{
+      text: 'spawn chicken',
+      promt: 'ent_create chicken;'
+    }]
+  }, {
+    name: 'Weapon Spray',
+    items: [{
+      text: 'on',
+      promt: 'weapon_accuracy_nospread 0;'
+    }, {
+      text: 'off',
+      promt: 'weapon_accuracy_nospread 1;'
+    }]
   }]
 
   const layoutItems = layoutConfig.map((layout) => (
-    <Form.Item key={layout.name} label={layout.name} style={{marginBottom: '8px'}}>
-      {layout.items.map((command) => (
-        <StyledTag key={command.text} text={command.text} onClick={() => send(command.promt)} />
-      ))}
-    </Form.Item>
+    <>
+      <Form.Item key={layout.name} label={layout.name} style={{marginBottom: '8px'}}>
+        {layout.items.map((command) => (
+          <StyledTag key={command.text} text={command.text} onClick={() => send(command.promt)} />
+        ))}
+      </Form.Item>
+      <Divider dashed style={{ margin: '5px' }} />
+    </>
   ))
 
   return (

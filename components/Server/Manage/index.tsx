@@ -22,6 +22,7 @@ const ModalServerManage = ({ server }:any) => {
       <Modal title={`Manage: ${server.name}`} footer={null} open={isModalOpen} onCancel={handleCancel}>
         <Divider />
         <RconTeams server={server} />
+
         <RconSay server={server} />
         <RconMaps server={server} />
       </Modal>

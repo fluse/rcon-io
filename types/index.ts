@@ -3,6 +3,7 @@ export interface Map {
   workshopId?: string
   filename?: string
   name: string
+  mode?: string
   commands?: string
   rating: number
 }
